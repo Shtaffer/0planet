@@ -125,7 +125,39 @@ QGraphicsScene* CGame::draw()
     gradient.setSpread(QGradient::PadSpread);
     scene->setBackgroundBrush(gradient);
 
-    scene->addEllipse(-5,-5, 10,10, QPen(Qt::black), QBrush(Qt::black));
+
+    if(galaxy != nullptr)
+    {
+        scene->addEllipse(-10,-10, 20,20, QPen(Qt::black), QBrush(Qt::black));
+
+        qreal x = 30;
+        int i = 0;
+
+        int colors[] = {Qt::yellow, Qt::darkYellow, Qt::red, Qt::darkRed};
+
+        for(auto sector : *galaxy->getSectors())
+        {
+            QPen pen = QPen(Qt::black);
+            QBrush brush = QBrush(Qt::yellow);
+
+            for (auto solarSystem : *sector->getSolarSystems())
+            {
+                scene->addEllipse(x-5,-5, 10,10, pen, brush);
+                int y = 10;
+
+                for(auto planet : *solarSystem->getPlanets())
+                {
+                    //QBrush brush(Qt::blue);
+
+                    scene->addEllipse(x-2, y-2, 4,4, pen, brush);
+                    y += 5;
+                }
+
+                x += 10;
+            }
+            x += 10;
+        }
+    }
 
 
 

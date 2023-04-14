@@ -25,6 +25,10 @@ protected:
     int owner;
     int id = -1;
     CSpaceObject* parent;
+
+    qreal x,y,size,speed;
+    int color;
+
 };
 
 class CPlanet : public CSpaceObject
